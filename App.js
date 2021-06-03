@@ -8,9 +8,9 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { AppBottomNavigator } from './navigation/app_navigation';
+import { AppBottomNavigator } from './src/navigation/app_navigation';
 import { enableScreens } from 'react-native-screens';
-import store from './store/store';
+import store from './src/store/store';
 import { Provider } from 'react-redux';
 
 enableScreens();

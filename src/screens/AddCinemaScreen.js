@@ -80,8 +80,13 @@ const AddCinemaScreen = props => {
 
                 <View style={styles.modalContainer}>
                     <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Inserisci le info della sala!</Text>
-                        <View style={{ flex: 1, width: '100%' }}>
+                        <View style={styles.modalHeader}>
+                        <Text style={styles.modalText}>Inserisci le info!</Text>
+                        <TouchableOpacity title="Chiudi" onPress={() => setModalVisible(false)} style={styles.closeBtn}>
+                            <Ionicons name="close" color={Colors.white} size={24}/>
+                        </TouchableOpacity>
+                        </View>
+                        <View style={{ flex: 1, width: '100%' , paddingTop: 8}}>
                             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
                                 <FormInput
@@ -129,19 +134,25 @@ const AddCinemaScreen = props => {
                                 />
                                 <View style={styles.touchable}>
                                     <TouchableComponent onPress={() => {
-
-                                        setCinemaRooms([...cinemaRooms, {
-                                            id: Math.floor(Math.random() * 1000) + 1,
-                                            name: roomName,
-                                            seats: roomSeats,
-                                            shows: [firstShow, secondShow, thirdShow]
-                                        }]);
-                                        setRoomName("");
-                                        setRoomSeats("");
-                                        setFirstShow("");
-                                        setSecondShow("");
-                                        setThirdShow("");
-                                        setModalVisible(false);
+                                        console.log("AAA");
+                                        if(roomName !== "" && roomSeats !== "" && firstShow !== "" && secondShow !== "" && thirdShow !== ""){
+                                            setCinemaRooms([...cinemaRooms, {
+                                                id: Math.floor(Math.random() * 1000) + 1,
+                                                name: roomName,
+                                                seats: roomSeats,
+                                                shows: [firstShow, secondShow, thirdShow]
+                                            }]);
+                                            setRoomName("");
+                                            setRoomSeats("");
+                                            setFirstShow("");
+                                            setSecondShow("");
+                                            setThirdShow("");
+                                            setModalVisible(false);
+                                        }
+                                        else{
+                                            Alert.alert("Operazione negata", "Controlla tutti i campi", [{text: 'Ok'}])
+                                        }
+                                        
                                     }}>
                                         <View style={styles.addBtnContainer}>
                                             <Text style={styles.btnText}>Conferma</Text>
@@ -278,5 +289,23 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 20,
         alignItems: 'center',
+    },
+    modalHeader: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    closeBtn: {
+        width: 50,
+        height: 50,
+        backgroundColor: Colors.orange,
+        borderRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    modalText: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 20
     }
 });

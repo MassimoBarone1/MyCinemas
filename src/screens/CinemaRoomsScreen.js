@@ -11,14 +11,14 @@ const CinemaRoomsScreen = props => {
     // Set header title
     useEffect(() => {
         props.navigation.setOptions({
-            title: selectedCinema.name
+            title: selectedCinema.name ? selectedCinema.name : 'Choose a Room'
         });
     },[selectedCinema]);
 
 
     return (
         <View style={styles.container}>
-            <FlatList
+            {selectedCinema.name ? <FlatList
             numColumns={2}
             contentContainerStyle={{flexGrow: 1}}
             data={selectedCinema.rooms}
@@ -26,7 +26,8 @@ const CinemaRoomsScreen = props => {
             renderItem={itemData => <CinemaRoomRowCard
             roomName={itemData.item.name}
             roomSeats={itemData.item.seats}
-            shows={itemData.item.shows}/>}/>
+            shows={itemData.item.shows}/>}/> : <View style={{alignItems: 'center'}}><Text style={styles.fallbackTxt}>No cinema selected!</Text></View>}
+            
         </View>
     )
 };
@@ -38,5 +39,10 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'center',
         backgroundColor: Colors.white
+    },
+    fallbackTxt: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 24,
+        textAlign: 'center',
     }
 });

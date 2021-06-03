@@ -23,7 +23,7 @@ const CinemasScreen = props => {
 
     return (
         <View style={styles.mainContainer}>
-            <FlatList contentContainerStyle={styles.list}
+            {cinemas.length > 0 ? <FlatList contentContainerStyle={styles.list}
                 data={cinemas}
                 renderItem={(itemData) => <CinemaCard
                     name={itemData.item.name}
@@ -39,7 +39,8 @@ const CinemasScreen = props => {
                             setSelectedId(itemData.item.id);
                         }
                     }} />}
-                keyExtractor={item => item.id} />
+                keyExtractor={item => item.id} /> : <View style={{alignItems: 'center'}}><Text style={styles.fallbackTxt}>No Cinemas Added!</Text></View>}
+            
         </View>
     )
 };
@@ -49,7 +50,13 @@ export default CinemasScreen;
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        justifyContent: 'center'
+    },
+    fallbackTxt: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 24,
+        textAlign: 'center'
     },
     list: {
         flexGrow: 1,

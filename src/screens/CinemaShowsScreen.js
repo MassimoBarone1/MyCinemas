@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 const CinemaShowsScreen = props => {
     return (
         <View style={styles.container}>
-            <Text>You have not chosen a room yet!</Text>
+            <Text style={styles.fallbackTxt}>You have not chosen a room yet!</Text>
         </View>
     )
 };
@@ -17,5 +17,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white'
+    },
+    fallbackTxt: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 24,
+        textAlign: 'center'
     }
 });
