@@ -6,7 +6,8 @@ export const cinemaSlice = createSlice({
     name: 'cinemaSlice',
     initialState: {
         cinemas: [],
-        selectedCinema: {}
+        selectedCinema: {},
+        selectedRoom: {}
     },
     reducers: {
         fetchCinemas: (state) => {
@@ -26,6 +27,7 @@ export const cinemaSlice = createSlice({
         updateSelectedCinema: (state, action) => {
             if(action.payload === -1){
                 state.selectedCinema = {}
+                state.selectedRoom = {}
             }
             else{
                 const selectedCinema = state.cinemas.find(cinema => cinema.id === action.payload);
@@ -34,9 +36,28 @@ export const cinemaSlice = createSlice({
                 }
             }
             
+        },
+        updateSelectedRoom: (state, action) => {
+            console.log(action.payload);
+            if(action.payload === -1){
+                state.selectedRoom = {};
+            }
+            else{
+                
+                if(state.selectedCinema){
+                    const selectedRoom = state.selectedCinema.rooms.find(room => room.id === action.payload);
+                    if(selectedRoom){
+                        state.selectedRoom = selectedRoom;
+                    }
+                }
+                else{
+                    console.log("NO CINEMA");
+                }
+                
+            }
         }
     }
 });
 
-export const { fetchCinemas, saveCinema, updateSelectedCinema } = cinemaSlice.actions;
+export const { fetchCinemas, saveCinema, updateSelectedCinema, updateSelectedRoom } = cinemaSlice.actions;
 export default cinemaSlice.reducer;

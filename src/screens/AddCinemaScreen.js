@@ -210,7 +210,7 @@ const AddCinemaScreen = props => {
             <View style={styles.touchable}>
                 <TouchableComponent onPress={() => {
                     setModalVisible(true);
-                }}>
+                }} style={{flex: 1}}>
                     <View style={styles.addBtnContainer}>
                         <Text style={styles.btnText}>Aggiungi Sala</Text>
                     </View>
@@ -245,6 +245,8 @@ const styles = StyleSheet.create({
     touchable: {
         alignItems: 'center',
         paddingBottom: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+        borderRadius: 30,
     },
     addBtnContainer: {
         width: Dimensions.get('window').width * 0.6,
@@ -253,7 +255,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
-        marginTop: 16
+        marginTop: 16,
     },
     btnText: {
         color: Colors.white,

@@ -4,7 +4,7 @@ import Colors from '../utils/colors';
 
 const CinemaRoomRowCard = props => {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity onPress={props.onClick} style={{...styles.container, borderColor: props.selected ? Colors.orange : 'transparent'}}>
             <ImageBackground style={styles.bgImage} source={require('../assets/images/pattern.png')}>
                 <View style={styles.innerImgContainer}>
             <View style={styles.titleContainer}><Text style={styles.roomName}>{props.roomName}</Text></View>
@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.white,
         overflow: 'hidden',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderWidth: 1,
     },
     bgImage: {
         width: '100%',
