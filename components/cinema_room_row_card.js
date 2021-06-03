@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, ImageBackground, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, ImageBackground, TouchableOpacity, Dimensions} from 'react-native';
 import Colors from '../utils/colors';
 
 const CinemaRoomRowCard = props => {
@@ -11,7 +11,8 @@ const CinemaRoomRowCard = props => {
             <View style={styles.roomsContainer}><Text style={styles.roomSeats}>{props.roomSeats} Posti a sedere</Text></View>
             <View style={styles.showsContainer}>
                 <Text style={styles.roomShows}>Spettacoli</Text>
-                <Text style={styles.roomShowTxt}>{props.show1}</Text>
+                {props.shows.map(show => <Text style={styles.roomShowTxt}>{show}</Text>)}
+                
             </View>
             </View>
             </ImageBackground>
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 10,
         width: '80%',
-        height: 200,
+        height: Dimensions.get('window').height * 0.4,
         elevation: 20,
         shadowColor: Colors.black,
         shadowOpacity: 0.4,

@@ -147,9 +147,7 @@ const AddCinemaScreen = props => {
                                             id: Math.floor(Math.random() * 1000) + 1,
                                             name: roomName,
                                             seats: roomSeats,
-                                            show1: firstShow,
-                                            show2: secondShow,
-                                            show3: thirdShow
+                                            shows: [firstShow, secondShow, thirdShow]
                                         }]);
                                         setRoomName("");
                                         setRoomSeats("");
@@ -218,7 +216,7 @@ const AddCinemaScreen = props => {
                 <CinemaRoomRow
                 name={element.name}
                 numOfSeats={element.seats}
-                shows={[element.show1, element.show2, element.show3]} />
+                shows={element.shows} />
                 </View>))}
                 
             </View>
@@ -281,7 +279,8 @@ const styles = StyleSheet.create({
     labelRoomsContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: 8
+        paddingTop: 8,
+        flex: 1,
     },
     modalContainer: {
         flex: 1,

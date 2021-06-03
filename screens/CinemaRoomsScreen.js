@@ -26,7 +26,7 @@ const CinemaRoomsScreen = props => {
             renderItem={itemData => <CinemaRoomRowCard
             roomName={itemData.item.name}
             roomSeats={itemData.item.seats}
-            show1={itemData.item.show1}/>}/>
+            shows={itemData.item.shows}/>}/>
         </View>
     )
 };

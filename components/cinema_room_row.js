@@ -1,15 +1,16 @@
 import React from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, ScrollView} from 'react-native';
 import Colors from '../utils/colors';
 
 const CinemaRoomRow = props => {
 
     return (<View style={styles.container}>
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <Text style={styles.labelContainer}>Sala: <Text style={styles.value}>{props.name}</Text></Text>
         <Text style={{...styles.labelContainer, paddingTop: 8}}>Posti a sedere: <Text style={styles.value}>{props.numOfSeats}</Text></Text>
         <Text style={{...styles.labelContainer, paddingTop: 8}}>Spettacoli:</Text>
         {props.shows.map(show => <Text style={{...styles.value, paddingTop: 4, }}>{show}</Text>)}
-
+        </ScrollView>
     </View>)
 };
 
