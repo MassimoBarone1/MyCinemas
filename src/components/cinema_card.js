@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         justifyContent: 'center',
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 10,
         elevation: 30,
         shadowColor: 'black',
