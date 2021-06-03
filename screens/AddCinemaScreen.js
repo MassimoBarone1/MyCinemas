@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { saveCinema } from '../store/slice/cinema_slice';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CinemaRoomRow from '../components/cinema_room_row';
+import FormInput from '../components/form_input';
 
 const AddCinemaScreen = props => {
 
@@ -38,9 +39,11 @@ const AddCinemaScreen = props => {
             rooms: cinemaRooms,
             roomsNumber: cinemaRooms.length
         }));
-        Alert.alert("Success", "Cinema saved!", [{text: 'Ok', onPress: () => {
-            props.navigation.goBack();
-        }}])
+        Alert.alert("Success", "Cinema saved!", [{
+            text: 'Ok', onPress: () => {
+                props.navigation.goBack();
+            }
+        }])
     }, [name, address, openings, cinemaRooms]);
 
     useEffect(() => {
@@ -78,71 +81,55 @@ const AddCinemaScreen = props => {
                 <View style={styles.modalContainer}>
                     <View style={styles.modalView}>
                         <Text style={styles.modalText}>Inserisci le info della sala!</Text>
-                        <View style={{flex: 1, width: '100%'}}>
-                        <ScrollView contentContainerStyle={{ flexGrow: 1}}>
-                            
-                                <View style={styles.fieldContainer}>
-                                    <Text style={styles.label}>
-                                        Nome Sala
-                                    </Text>
-                                    <TextInput
-                                    style={styles.textInput}
-                                    value={roomName}
-                                    onChangeText={(text) => setRoomName(text)}
-                                    returnKeyType="next" 
-                                    onSubmitEditing={() => {
-                                        numberOfSeatsRef.current.focus();
-                                    }}
-                                    blurOnSubmit={false}/>
-                                </View>
-                                <View style={styles.fieldContainer}>
-                                    <Text style={styles.label}>
-                                        Numero Posti
-                                    </Text>
-                                    <TextInput 
-                                    style={styles.textInput}
-                                    value={roomSeats}
+                        <View style={{ flex: 1, width: '100%' }}>
+                            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+
+                                <FormInput
+                                    label="Nome Sala"
+                                    initialValue={roomName}
+                                    onChange={(text) => setRoomName(text)}
+                                    keyboardType="default"
+                                    returnKeyType="next"
+                                    onSubmitEditing={() => { numberOfSeatsRef.current.focus(); }}
+                                    blurOnSubmit={false} />
+
+                                <FormInput
+                                    label="Numero Posti"
+                                    initialValue={roomSeats}
+                                    onChange={(text) => setRoomSeats(text)}
                                     keyboardType="phone-pad"
-                                    onChangeText={(text) => setRoomSeats(text)}
                                     ref={numberOfSeatsRef} />
-                                </View>
-                                <View style={styles.fieldContainer}>
-                                    <Text style={styles.label}>
-                                        Film 1
-                                    </Text>
-                                    <TextInput 
-                                    style={styles.textInput}
-                                    value={firstShow}
-                                    onChangeText={(text) => setFirstShow(text)}
+
+                                <FormInput
+                                    label="Film 1"
+                                    initialValue={firstShow}
+                                    onChange={(text) => setFirstShow(text)}
                                     returnKeyType="next"
-                                    onSubmitEditing={() => secondShowRef.current.focus()} />
-                                </View>
-                                <View style={styles.fieldContainer}>
-                                    <Text style={styles.label}>
-                                        Film 2
-                                    </Text>
-                                    <TextInput
-                                    style={styles.textInput}
-                                    value={secondShow}
-                                    onChangeText={(text) => setSecondShow(text)}
+                                    keyboardType="default"
+                                    onSubmitEditing={() => secondShowRef.current.focus()}
+                                    blurOnSubmit={false} />
+
+                                <FormInput
+                                    label="Film 2"
+                                    initialValue={secondShow}
+                                    onChange={(text) => setSecondShow(text)}
                                     returnKeyType="next"
+                                    keyboardType="default"
                                     ref={secondShowRef}
-                                    onSubmitEditing={() => thirdShowRef.current.focus()} />
-                                </View>
-                                <View style={{...styles.fieldContainer, paddingBottom: 10}}>
-                                    <Text style={styles.label}>
-                                        Film 3
-                                    </Text>
-                                    <TextInput
-                                    style={styles.textInput}
-                                    value={thirdShow}
-                                    onChangeText={(text) => setThirdShow(text)}
+                                    onSubmitEditing={() => thirdShowRef.current.focus()}
+                                    blurOnSubmit={false} />
+
+                                <FormInput
+                                    label="Film 3"
+                                    initialValue={thirdShow}
+                                    onChange={(text) => setThirdShow(text)}
                                     returnKeyType="done"
-                                    ref={thirdShowRef} />
-                                </View>
+                                    keyboardType="default"
+                                    ref={thirdShowRef}
+                                />
                                 <View style={styles.touchable}>
                                     <TouchableComponent onPress={() => {
-                                        
+
                                         setCinemaRooms([...cinemaRooms, {
                                             id: Math.floor(Math.random() * 1000) + 1,
                                             name: roomName,
@@ -161,64 +148,53 @@ const AddCinemaScreen = props => {
                                         </View>
                                     </TouchableComponent>
                                 </View>
-                            
-                        </ScrollView>
+
+                            </ScrollView>
                         </View>
                     </View>
                 </View>
 
             </Modal>
             <View>
-                <View style={styles.fieldContainer}>
-                    <Text style={styles.label}>
-                        Nome Cinema
-                </Text>
-                    <TextInput
-                    style={styles.textInput}
-                    value={name}
+                <FormInput
+                    label="Nome Cinema"
+                    initialValue={name}
+                    onChange={(text) => setName(text)}
                     keyboardType="default"
                     returnKeyType="next"
-                    onChangeText={(text) => setName(text)}
-                    onSubmitEditing={() => addressRef.current.focus()} />
-                </View>
-                <View style={styles.fieldContainer}>
-                    <Text style={styles.label}>
-                        Indirizzo
-                </Text>
-                    <TextInput
-                    style={styles.textInput}
-                    value={address}
+                    onSubmitEditing={() => addressRef.current.focus()}
+                    blurOnSubmit={false} />
+                <FormInput
+                    label="Indirizzo"
+                    initialValue={address}
+                    onChange={(text) => setAddress(text)}
                     keyboardType="default"
                     returnKeyType="next"
-                    onChangeText={(text) => setAddress(text)}
                     ref={addressRef}
-                    onSubmitEditing={() => openingHoursRef.current.focus()}/>
-                </View>
-                <View style={styles.fieldContainer}>
-                    <Text style={styles.label}>
-                        Orari Apertura
-                    </Text>
-                    <TextInput
-                    style={styles.textInput}
-                    value={openings}
+                    onSubmitEditing={() => openingHoursRef.current.focus()}
+                    blurOnSubmit={false} />
+                <FormInput
+                    label="Orari Apertura"
+                    initialValue={openings}
+                    onChange={(text) => setOpenings(text)}
                     keyboardType="default"
                     returnKeyType="done"
-                    onChangeText={(text) => setOpenings(text)}
-                    ref={openingHoursRef} />
-                </View>
+                    ref={openingHoursRef}
+                    blurOnSubmit={false} />
+
                 <View style={styles.labelRoomsContainer}>
                     <Text style={styles.labelRooms}>Sale</Text>
                 </View>
                 {cinemaRooms.length === 0 ? <View style={styles.labelRoomsContainer}>
                     <Text style={styles.labelRooms}>Nessuna sala aggiunta</Text>
                 </View> : cinemaRooms.map(element => (
-                 <View style={styles.labelRoomsContainer}>
-                <CinemaRoomRow
-                name={element.name}
-                numOfSeats={element.seats}
-                shows={element.shows} />
-                </View>))}
-                
+                    <View style={styles.labelRoomsContainer}>
+                        <CinemaRoomRow
+                            name={element.name}
+                            numOfSeats={element.seats}
+                            shows={element.shows} />
+                    </View>))}
+
             </View>
             <View style={styles.touchable}>
                 <TouchableComponent onPress={() => {
@@ -280,7 +256,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingTop: 8,
-        flex: 1,
     },
     modalContainer: {
         flex: 1,
