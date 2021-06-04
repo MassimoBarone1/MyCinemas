@@ -19,12 +19,6 @@ const CinemaRoomsScreen = props => {
         });
     },[selectedCinema]);
 
-    useEffect(() => {
-        props.navigation.setOptions({
-            selectedRoom: selectedCinema
-        });
-    },[selectedRoom]);
-
     
 
     useEffect(() => {
@@ -37,7 +31,7 @@ const CinemaRoomsScreen = props => {
     return (
         <View style={styles.container}>
             {selectedCinema.name ? <FlatList
-            numColumns={2}
+            
             contentContainerStyle={{flexGrow: 1}}
             data={selectedCinema.rooms}
             keyExtractor={item => item.id}

@@ -1,16 +1,19 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView, Dimensions, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import { buyTicket } from '../store/slice/cinema_slice';
 import Colors from '../utils/colors';
 import ShowInfoCard from '../components/show_info_card';
 import RoundedButton from '../components/rounded_button';
 import CircularButton from '../components/circular_button';
+import uuid from 'react-native-uuid';
 
 const CinemaBookingScreen = props => {
 
     const selectedShow = useSelector(state => state.cinema.selectedShow);
     const selectedRoom = useRef(useSelector(state => state.cinema.selectedRoom));
-    const [ticketQty, setTicketQty] = useState(1);
+    const [ticketQty, setTicketQty] = useState(0);
+    const dispatch = useDispatch();
 
     return (
         <View style={styles.container}>
@@ -56,7 +59,18 @@ const CinemaBookingScreen = props => {
                             </View>
                         </View>
                         <RoundedButton
-                            onClick={() => { }}
+                            onClick={() => {
+                                dispatch(buyTicket({
+                                    id: uuid.v4(),
+                                    showId: selectedShow.id,
+                                    ticketQty: ticketQty
+                                }));
+                                Alert.alert("Operazione Completata!", "Biglietto Acquistato", [{ text: 'Ok', onPress: () => {
+                                    setTicketQty(0);
+                                    
+                                }}])
+                                
+                             }}
                             label="Acquista"
                             mainStyles={{ marginBottom: 8 }} />
                     </View>

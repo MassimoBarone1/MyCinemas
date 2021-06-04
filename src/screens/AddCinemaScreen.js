@@ -12,7 +12,6 @@ import RoundedButton from '../components/rounded_button';
 import CircularButton from '../components/circular_button';
 
 const formatDate = (date) => {
-    console.log("BBB " + date);
     if(date){
         const day = date.getDate();
         const month = date.getMonth() + 1;
@@ -27,7 +26,7 @@ const formatDate = (date) => {
         }
         
         const result = day + "-" + month + "-" + year + " " + hours + ":" + minutes;
-        console.log("Result is "  + result);
+        
         return result;
     }
     else{
@@ -55,7 +54,7 @@ const AddCinemaScreen = props => {
     const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
     const [clickedValue, setClickedValue] = useState(-1);
 
-    console.log("Date " + firstShowDate + " " + secondShowDate + " " + thirdShowDate);
+    
 
     const dispatch = useDispatch();
 

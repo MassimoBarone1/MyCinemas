@@ -19,6 +19,7 @@ const CinemaShowsScreen = props => {
 
     useEffect(() => {
         if(selectedId !== -1){
+            
             dispatch(updateSelectedShow(selectedId));
         }
     },[selectedId, updateSelectedShow]);
@@ -42,7 +43,7 @@ const CinemaShowsScreen = props => {
                 else{
                     setSelectedId(itemData.item.id);
                 }
-                console.log(itemData.item.id + " " + selectedId);
+                
             }}
             showName={itemData.item.name}
             showDate={itemData.item.date}

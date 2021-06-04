@@ -50,9 +50,6 @@ export const cinemaSlice = createSlice({
                         state.selectedRoom = selectedRoom;
                     }
                 }
-                else{
-                    console.log("NO CINEMA");
-                }
                 
             }
         },
@@ -61,14 +58,52 @@ export const cinemaSlice = createSlice({
                 state.selectedShow = {};
             }
             else{
-                const selectedShow = state.selectedRoom.shows.find(show => show.id === action.payload);
-                if(selectedShow){
-                    state.selectedShow = selectedShow;
+                
+                if(state.selectedRoom.shows){
+                    const selectedShow = state.selectedRoom.shows.find(show => show.id === action.payload);
+                    if(selectedShow){
+                        state.selectedShow = selectedShow;
+                    }
                 }
+                
             }
+        },
+        buyTicket: (state, action) => {
+            
+            // Update selected show
+            const remainingPlaces = parseInt(state.selectedShow.remainingPlaces) - parseInt(action.payload.ticketQty);
+            let updatedShow = state.selectedShow;
+            updatedShow.remainingPlaces = remainingPlaces;
+            state.selectedShow = updatedShow;
+            
+            // Update tickets
+            state.showTickets = [...state.showTickets, {
+                id: action.payload.id,
+                showId: action.payload.showId,
+                qty: action.payload.ticketQty
+            }];
+
+            // Update selected room
+            const selectedShowInRoomIdx = state.selectedRoom.shows.findIndex(show => show.id === action.payload.showId);
+            if(selectedShowInRoomIdx > -1){
+                state.selectedRoom.shows[selectedShowInRoomIdx].remainingPlaces = remainingPlaces;
+            }
+
+            // update cinema data
+            const selectedCinemaRoomIndex = state.selectedCinema.rooms.findIndex(room => room.id === state.selectedRoom.id);
+            if(selectedCinemaRoomIndex > -1){
+                state.selectedCinema.rooms[selectedCinemaRoomIndex] = state.selectedRoom;
+            }
+
+            // update cinemas
+            const cinemaIdx = state.cinemas.findIndex(cinema => cinema.id === state.selectedCinema.id);
+            if(cinemaIdx > -1){
+                state.cinemas[cinemaIdx] = state.selectedCinema;
+            }
+
         }
     }
 });
 
-export const { fetchCinemas, saveCinema, updateSelectedCinema, updateSelectedRoom , updateSelectedShow} = cinemaSlice.actions;
+export const { fetchCinemas, saveCinema, updateSelectedCinema, updateSelectedRoom , updateSelectedShow, buyTicket} = cinemaSlice.actions;
 export default cinemaSlice.reducer;
