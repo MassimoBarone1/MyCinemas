@@ -11,7 +11,7 @@ const formatDate = (date) => {
 const ShowCard = props => {
     return (
     
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={{...styles.container, borderColor: props.selected ? Colors.orange : Colors.black}} onPress={props.onClick}>
         <Text style={styles.showName}>{props.showName}</Text>
         <Text style={styles.showDate}>{formatDate(props.showDate)}</Text>
         <Text style={{...styles.showPlaces, color: props.showPlaces > 10 ? Colors.green : Colors.red}}>{props.showPlaces > 1 ? props.showPlaces + " Posti rimanenti" : props.showPlaces === 1 ? "1 Posto rimanente" : "Esaurito"}</Text>

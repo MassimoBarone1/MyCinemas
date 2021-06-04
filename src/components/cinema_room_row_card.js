@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         color: Colors.white,
         fontSize: 18,
-        fontFamily: 'Montserrat-Light'
+        fontFamily: 'Montserrat-Light',
+        textAlign: 'center'
     },
     innerImgContainer: {
         flex: 1,

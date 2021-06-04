@@ -7,7 +7,9 @@ export const cinemaSlice = createSlice({
     initialState: {
         cinemas: [],
         selectedCinema: {},
-        selectedRoom: {}
+        selectedRoom: {},
+        selectedShow: {},
+        showTickets: []
     },
     reducers: {
         fetchCinemas: (state) => {
@@ -37,7 +39,6 @@ export const cinemaSlice = createSlice({
             
         },
         updateSelectedRoom: (state, action) => {
-            console.log(action.payload);
             if(action.payload === -1){
                 state.selectedRoom = {};
             }
@@ -54,9 +55,20 @@ export const cinemaSlice = createSlice({
                 }
                 
             }
+        },
+        updateSelectedShow: (state, action) => {
+            if(action.payload === -1){
+                state.selectedShow = {};
+            }
+            else{
+                const selectedShow = state.selectedRoom.shows.find(show => show.id === action.payload);
+                if(selectedShow){
+                    state.selectedShow = selectedShow;
+                }
+            }
         }
     }
 });
 
-export const { fetchCinemas, saveCinema, updateSelectedCinema, updateSelectedRoom } = cinemaSlice.actions;
+export const { fetchCinemas, saveCinema, updateSelectedCinema, updateSelectedRoom , updateSelectedShow} = cinemaSlice.actions;
 export default cinemaSlice.reducer;

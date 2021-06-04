@@ -19,6 +19,12 @@ const CinemaRoomsScreen = props => {
         });
     },[selectedCinema]);
 
+    useEffect(() => {
+        props.navigation.setOptions({
+            selectedRoom: selectedCinema
+        });
+    },[selectedRoom]);
+
     
 
     useEffect(() => {

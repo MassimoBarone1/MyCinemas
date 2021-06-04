@@ -9,7 +9,7 @@ import AddCinemaScreen from '../screens/AddCinemaScreen';
 import { Platform } from 'react-native';
 import Colors from '../utils/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {StyleSheet} from 'react-native';
+
 const commonStackOptions = {
     headerStyle: {
         backgroundColor: Platform.OS === 'android' ? Colors.orange : Colors.white
@@ -19,6 +19,7 @@ const commonStackOptions = {
         fontFamily: 'Montserrat-Bold'
     }
 };
+
 
 // Cinema Stack
 const CinemaStackNavigator = createStackNavigator();
@@ -108,7 +109,7 @@ export const AppBottomNavigator = () => {
                     tabBarLabel: 'Discover',
                     tabBarIcon: ({ color, size }) => {
                         return <Ionicons name='search' color={color} size={size} />;
-                    }
+                    },
                 }} />
             <AppBottomTabNavigator.Screen
                 name="Rooms"
