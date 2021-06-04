@@ -20,8 +20,7 @@ export const cinemaSlice = createSlice({
                 address: action.payload.address,
                 openings: action.payload.openings,
                 rooms: action.payload.rooms,
-                roomsNumber: action.payload.rooms.length,
-                selected: false
+                roomsNumber: action.payload.rooms.length
             }];
         },
         updateSelectedCinema: (state, action) => {

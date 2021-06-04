@@ -4,7 +4,7 @@ import Colors from '../utils/colors';
 
 const FormInput = (props, ref) => {
     return (
-        <View style={styles.fieldContainer}>
+        <View style={{...styles.fieldContainer, ...props.style}}>
             <Text style={styles.label}>{props.label}</Text>
             <TextInput
                 {...props}
@@ -20,14 +20,14 @@ export default forwardRef(FormInput);
 
 const styles = StyleSheet.create({
     fieldContainer: {
-        width: '100%',
         alignItems: 'center'
     },
     label: {
         marginTop: 10,
         marginLeft: 8,
         fontSize: 16,
-        fontFamily: 'Montserrat-Medium'
+        fontFamily: 'Montserrat-Medium',
+        width: '80%'
     },
     textInput: {
         padding: 2,

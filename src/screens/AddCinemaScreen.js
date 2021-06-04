@@ -6,6 +6,16 @@ import { saveCinema } from '../store/slice/cinema_slice';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CinemaRoomRow from '../components/cinema_room_row';
 import FormInput from '../components/form_input';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+
+const formatDate = (date) => {
+    const day = date.getDay();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    return day + "-" + month + "-" + year + " " + hours + ":" + minutes;
+}
 
 const AddCinemaScreen = props => {
 
@@ -17,9 +27,14 @@ const AddCinemaScreen = props => {
     const [roomName, setRoomName] = useState("");
     const [roomSeats, setRoomSeats] = useState("");
     const [firstShow, setFirstShow] = useState("");
+    const [firstShowDate, setFirstShowDate] = useState(new Date());
     const [secondShow, setSecondShow] = useState("");
+    const [secondShowDate, setSecondShowDate] = useState(new Date());
     const [thirdShow, setThirdShow] = useState("");
+    const [thirdShowDate, setThirdShowDate] = useState(new Date());
     const [cinemaRooms, setCinemaRooms] = useState([]);
+    const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
+    const [clickedValue, setClickedValue] = useState(-1);
 
     const dispatch = useDispatch();
 
@@ -58,7 +73,7 @@ const AddCinemaScreen = props => {
 
             }} />)
         })
-    }, [saveCinemaHandler, name, address, openings]);
+    }, [saveCinemaHandler, name, address, openings, cinemaRooms]);
 
     // Change touchable
     let TouchableComponent = TouchableOpacity;
@@ -73,98 +88,153 @@ const AddCinemaScreen = props => {
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => {
-                    Alert.alert("Modal has been closed.");
                     setModalVisible(!modalVisible);
                 }}
             >
+                <View
+                    style={styles.modalBackground}>
+                    <View style={styles.modalContainer}>
+                        <View style={styles.modalView}>
+                            <View style={styles.modalHeader}>
+                                <Text style={styles.modalText}>Inserisci le info!</Text>
+                                <TouchableOpacity title="Chiudi" onPress={() => setModalVisible(false)} style={styles.closeBtn}>
+                                    <Ionicons name="close" color={Colors.white} size={24} />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ flex: 1, width: '100%', paddingTop: 8 }}>
+                                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
-                <View style={styles.modalContainer}>
-                    <View style={styles.modalView}>
-                        <View style={styles.modalHeader}>
-                        <Text style={styles.modalText}>Inserisci le info!</Text>
-                        <TouchableOpacity title="Chiudi" onPress={() => setModalVisible(false)} style={styles.closeBtn}>
-                            <Ionicons name="close" color={Colors.white} size={24}/>
-                        </TouchableOpacity>
-                        </View>
-                        <View style={{ flex: 1, width: '100%' , paddingTop: 8}}>
-                            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                                    <FormInput
+                                        label="Nome Sala"
+                                        initialValue={roomName}
+                                        onChange={(text) => setRoomName(text)}
+                                        keyboardType="default"
+                                        returnKeyType="next"
+                                        onSubmitEditing={() => { numberOfSeatsRef.current.focus(); }}
+                                        blurOnSubmit={false} />
 
-                                <FormInput
-                                    label="Nome Sala"
-                                    initialValue={roomName}
-                                    onChange={(text) => setRoomName(text)}
-                                    keyboardType="default"
-                                    returnKeyType="next"
-                                    onSubmitEditing={() => { numberOfSeatsRef.current.focus(); }}
-                                    blurOnSubmit={false} />
+                                    <FormInput
+                                        label="Numero Posti"
+                                        initialValue={roomSeats}
+                                        onChange={(text) => setRoomSeats(text)}
+                                        keyboardType="phone-pad"
+                                        ref={numberOfSeatsRef} />
 
-                                <FormInput
-                                    label="Numero Posti"
-                                    initialValue={roomSeats}
-                                    onChange={(text) => setRoomSeats(text)}
-                                    keyboardType="phone-pad"
-                                    ref={numberOfSeatsRef} />
+                                    <View style={styles.formBtnContainer}>
+                                        <FormInput
+                                            label={"Film 1, Inizio: " + formatDate(firstShowDate)}
+                                            style={{ width: '80%' }}
+                                            initialValue={firstShow}
+                                            onChange={(text) => setFirstShow(text)}
+                                            returnKeyType="next"
+                                            keyboardType="default"
+                                            onSubmitEditing={() => secondShowRef.current.focus()}
+                                            blurOnSubmit={false} />
+                                        <TouchableOpacity onPress={() => {
+                                            setClickedValue(0);
+                                            setIsDatePickerVisible(true);
+                                        }} style={styles.calendarBtn}>
+                                            <Ionicons name="calendar" color={Colors.white} size={24} />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={styles.formBtnContainer}>
+                                        <FormInput
+                                            label={"Film 2, Inizio: " + formatDate(secondShowDate)}
+                                            style={{ width: '80%' }}
+                                            initialValue={secondShow}
+                                            onChange={(text) => setSecondShow(text)}
+                                            returnKeyType="next"
+                                            keyboardType="default"
+                                            ref={secondShowRef}
+                                            onSubmitEditing={() => thirdShowRef.current.focus()}
+                                            blurOnSubmit={false} />
+                                        <TouchableOpacity onPress={() => {
+                                            setClickedValue(1);
+                                            setIsDatePickerVisible(true)
+                                        }} style={styles.calendarBtn}>
+                                            <Ionicons name="calendar" color={Colors.white} size={24} />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={styles.formBtnContainer}>
+                                        <FormInput
+                                            label={"Film 3, Inizio: " + formatDate(thirdShowDate)}
+                                            style={{ width: '80%' }}
+                                            initialValue={thirdShow}
+                                            onChange={(text) => setThirdShow(text)}
+                                            returnKeyType="done"
+                                            keyboardType="default"
+                                            ref={thirdShowRef}
+                                        />
+                                        <TouchableOpacity onPress={() => {
+                                            setClickedValue(2);
+                                            setIsDatePickerVisible(true)
+                                        }} style={styles.calendarBtn}>
+                                            <Ionicons name="calendar" color={Colors.white} size={24} />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={styles.touchable}>
+                                        <TouchableComponent onPress={() => {
 
-                                <FormInput
-                                    label="Film 1"
-                                    initialValue={firstShow}
-                                    onChange={(text) => setFirstShow(text)}
-                                    returnKeyType="next"
-                                    keyboardType="default"
-                                    onSubmitEditing={() => secondShowRef.current.focus()}
-                                    blurOnSubmit={false} />
+                                            if (roomName !== "" && roomSeats !== "" && firstShow !== "" && secondShow !== "" && thirdShow !== "") {
+                                                setCinemaRooms([...cinemaRooms, {
+                                                    id: Math.floor(Math.random() * 1000) + 1,
+                                                    name: roomName,
+                                                    seats: roomSeats,
+                                                    shows: [
+                                                        {
+                                                            name: firstShow,
+                                                            date: formatDate(firstShowDate)
+                                                        },
+                                                        {
+                                                            name: secondShow,
+                                                            date: formatDate(secondShowDate)
+                                                        },
+                                                        {
+                                                            name: thirdShow,
+                                                            date: formatDate(thirdShowDate)
+                                                        }]
+                                                }]);
+                                                setRoomName("");
+                                                setRoomSeats("");
+                                                setFirstShow("");
+                                                setSecondShow("");
+                                                setThirdShow("");
+                                                setModalVisible(false);
+                                            }
+                                            else {
+                                                Alert.alert("Operazione negata", "Controlla tutti i campi", [{ text: 'Ok' }])
+                                            }
 
-                                <FormInput
-                                    label="Film 2"
-                                    initialValue={secondShow}
-                                    onChange={(text) => setSecondShow(text)}
-                                    returnKeyType="next"
-                                    keyboardType="default"
-                                    ref={secondShowRef}
-                                    onSubmitEditing={() => thirdShowRef.current.focus()}
-                                    blurOnSubmit={false} />
+                                        }}>
+                                            <View style={styles.addBtnContainer}>
+                                                <Text style={styles.btnText}>Conferma</Text>
+                                            </View>
+                                        </TouchableComponent>
+                                    </View>
 
-                                <FormInput
-                                    label="Film 3"
-                                    initialValue={thirdShow}
-                                    onChange={(text) => setThirdShow(text)}
-                                    returnKeyType="done"
-                                    keyboardType="default"
-                                    ref={thirdShowRef}
-                                />
-                                <View style={styles.touchable}>
-                                    <TouchableComponent onPress={() => {
-                                        console.log("AAA");
-                                        if(roomName !== "" && roomSeats !== "" && firstShow !== "" && secondShow !== "" && thirdShow !== ""){
-                                            setCinemaRooms([...cinemaRooms, {
-                                                id: Math.floor(Math.random() * 1000) + 1,
-                                                name: roomName,
-                                                seats: roomSeats,
-                                                shows: [firstShow, secondShow, thirdShow]
-                                            }]);
-                                            setRoomName("");
-                                            setRoomSeats("");
-                                            setFirstShow("");
-                                            setSecondShow("");
-                                            setThirdShow("");
-                                            setModalVisible(false);
-                                        }
-                                        else{
-                                            Alert.alert("Operazione negata", "Controlla tutti i campi", [{text: 'Ok'}])
-                                        }
-                                        
-                                    }}>
-                                        <View style={styles.addBtnContainer}>
-                                            <Text style={styles.btnText}>Conferma</Text>
-                                        </View>
-                                    </TouchableComponent>
-                                </View>
-
-                            </ScrollView>
+                                </ScrollView>
+                            </View>
                         </View>
                     </View>
+                    <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode="datetime"
+                        onConfirm={(date) => {
+                            console.log("AAA confirm");
+                            if (clickedValue === 0) {
+                                setFirstShowDate(date);
+                            }
+                            else if (clickedValue === 1) {
+                                setSecondShowDate(date);
+                            }
+                            else {
+                                setThirdShowDate(date);
+                            }
+                            setIsDatePickerVisible(false);
+                        }}
+                        onCancel={() => setIsDatePickerVisible(false)}
+                    />
                 </View>
-
             </Modal>
             <View>
                 <FormInput
@@ -210,12 +280,13 @@ const AddCinemaScreen = props => {
             <View style={styles.touchable}>
                 <TouchableComponent onPress={() => {
                     setModalVisible(true);
-                }} style={{flex: 1}}>
+                }} style={{ flex: 1 }}>
                     <View style={styles.addBtnContainer}>
                         <Text style={styles.btnText}>Aggiungi Sala</Text>
                     </View>
                 </TouchableComponent>
             </View>
+
 
         </ScrollView>);
 };
@@ -306,8 +377,28 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    calendarBtn: {
+        width: 40,
+        height: 40,
+        backgroundColor: Colors.orange,
+        borderRadius: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 8
+    },
+    formBtnContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'flex-end',
+    },
     modalText: {
         fontFamily: 'Montserrat-Bold',
         fontSize: 20
+    },
+    modalBackground: {
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(100,100,100, 0.5)',
     }
 });

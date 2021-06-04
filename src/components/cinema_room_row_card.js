@@ -11,7 +11,7 @@ const CinemaRoomRowCard = props => {
             <View style={styles.roomsContainer}><Text style={styles.roomSeats}>{props.roomSeats} Posti a sedere</Text></View>
             <View style={styles.showsContainer}>
                 <Text style={styles.roomShows}>Spettacoli</Text>
-                {props.shows.map(show => <Text style={styles.roomShowTxt}>{show}</Text>)}
+                {props.shows.map(show => <Text style={styles.roomShowTxt}>{show.name}</Text>)}
                 
             </View>
             </View>
@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         margin: 10,
-        width: '80%',
-        height: Dimensions.get('window').height * 0.4,
+        width: '100%',
+        height: Dimensions.get('window').height * 0.35,
         elevation: 20,
         shadowColor: Colors.black,
         shadowOpacity: 0.4,

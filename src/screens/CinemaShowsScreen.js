@@ -20,7 +20,7 @@ const CinemaShowsScreen = props => {
             contentContainerStyle={{ flexGrow: 1}}
             keyExtractor={item => item.id}
             data={selectedRoom.shows}
-            renderItem={itemData => <Text>{itemData.item}</Text>} />: <View style={{alignItems: 'center'}}><Text style={styles.fallbackTxt}>You have not chosen a room yet!</Text></View>}
+            renderItem={itemData => <Text>{itemData.item.name}</Text>} />: <View style={{alignItems: 'center'}}><Text style={styles.fallbackTxt}>You have not chosen a room yet!</Text></View>}
             
         </View>
     )
