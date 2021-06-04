@@ -24,6 +24,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
+        shadowOpacity: 0.4,
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowRadius: 4,
+        elevation: 4
     },
     btnText: {
         color: Colors.white,
