@@ -6,6 +6,7 @@ import CinemaBookingScreen from '../screens/CinemaBookingScreen';
 import CinemaRoomsScreen from '../screens/CinemaRoomsScreen';
 import CinemaShowsScreen from '../screens/CinemaShowsScreen';
 import AddCinemaScreen from '../screens/AddCinemaScreen';
+import PersonalTicketsScreen from '../screens/PersonalTicketsScreen';
 import { Platform } from 'react-native';
 import Colors from '../utils/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -87,9 +88,18 @@ export const CinemaBookingNavigator = () => {
             <CinemaBookingStackNavigator.Screen
                 name="CinemaBooking"
                 component={CinemaBookingScreen}
-                options={{
+                options={({navigation, route}) => ({
+                    headerRight: () => (<Ionicons name="list" color={Platform.OS === 'android' ? Colors.white : Colors.orange} style={{padding: 8}} size={24} onPress={() => {
+                        navigation.navigate("PersonalTickets");
+                    }}/>),
                     title: 'Buy a Ticket'
-                }} />
+                })} />
+                <CinemaBookingStackNavigator.Screen
+                name="PersonalTickets"
+                component={PersonalTicketsScreen}
+                options={{
+                    title: 'Your Tickets'
+                }}/>
         </CinemaBookingStackNavigator.Navigator>
     );
 }
