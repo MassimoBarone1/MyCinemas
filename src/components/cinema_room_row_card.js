@@ -11,7 +11,7 @@ const CinemaRoomRowCard = props => {
             <View style={styles.roomsContainer}><Text style={styles.roomSeats}>{props.roomSeats} Posti a sedere</Text></View>
             <View style={styles.showsContainer}>
                 <Text style={styles.roomShows}>Spettacoli</Text>
-                {props.shows.map(show => <Text style={styles.roomShowTxt}>{show.name}</Text>)}
+                {props.shows.map(show => <Text key={show.id} style={styles.roomShowTxt}>{show.name}</Text>)}
                 
             </View>
             </View>

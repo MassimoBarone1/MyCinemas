@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import CinemaRoomRow from '../components/cinema_room_row';
 import FormInput from '../components/form_input';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import uuid from 'react-native-uuid';
 
 const formatDate = (date) => {
     const day = date.getDay();
@@ -47,7 +48,7 @@ const AddCinemaScreen = props => {
     // Submit function
     const saveCinemaHandler = useCallback(() => {
         dispatch(saveCinema({
-            id: Math.floor(Math.random() * 1000) + 1,
+            id: uuid.v4(),
             name: name,
             address: address,
             openings: openings,
@@ -177,19 +178,22 @@ const AddCinemaScreen = props => {
 
                                             if (roomName !== "" && roomSeats !== "" && firstShow !== "" && secondShow !== "" && thirdShow !== "") {
                                                 setCinemaRooms([...cinemaRooms, {
-                                                    id: Math.floor(Math.random() * 1000) + 1,
+                                                    id: uuid.v4(),
                                                     name: roomName,
                                                     seats: roomSeats,
                                                     shows: [
                                                         {
+                                                            id: uuid.v4(),
                                                             name: firstShow,
                                                             date: formatDate(firstShowDate)
                                                         },
                                                         {
+                                                            id: uuid.v4(),
                                                             name: secondShow,
                                                             date: formatDate(secondShowDate)
                                                         },
                                                         {
+                                                            id: uuid.v4(),
                                                             name: thirdShow,
                                                             date: formatDate(thirdShowDate)
                                                         }]
@@ -269,7 +273,7 @@ const AddCinemaScreen = props => {
                 {cinemaRooms.length === 0 ? <View style={styles.labelRoomsContainer}>
                     <Text style={styles.labelRooms}>Nessuna sala aggiunta</Text>
                 </View> : cinemaRooms.map(element => (
-                    <View style={styles.labelRoomsContainer}>
+                    <View key={element.id} style={styles.labelRoomsContainer}>
                         <CinemaRoomRow
                             name={element.name}
                             numOfSeats={element.seats}

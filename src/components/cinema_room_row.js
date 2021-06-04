@@ -18,7 +18,7 @@ const CinemaRoomRow = props => {
         <Text style={styles.labelContainer}>Sala: <Text style={styles.value}>{props.name}</Text></Text>
         <Text style={{...styles.labelContainer, paddingTop: 8}}>Posti a sedere: <Text style={styles.value}>{props.numOfSeats}</Text></Text>
         <Text style={{...styles.labelContainer, paddingTop: 8}}>Spettacoli:</Text>
-        {props.shows.map(show => <Text style={{...styles.value, paddingTop: 4, }}>{show.name} il {show.date}</Text>)}
+        {props.shows.map(show => <Text key={show.id} style={{...styles.value, paddingTop: 4, }}>{show.name} il {show.date}</Text>)}
         </ScrollView>
     </View>)
 };
