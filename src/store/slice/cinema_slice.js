@@ -29,6 +29,7 @@ export const cinemaSlice = createSlice({
             if(action.payload === -1){
                 state.selectedCinema = {}
                 state.selectedRoom = {}
+                state.selectedShow = {}
             }
             else{
                 const selectedCinema = state.cinemas.find(cinema => cinema.id === action.payload);
@@ -41,6 +42,7 @@ export const cinemaSlice = createSlice({
         updateSelectedRoom: (state, action) => {
             if(action.payload === -1){
                 state.selectedRoom = {};
+                state.selectedShow = {}
             }
             else{
                 
