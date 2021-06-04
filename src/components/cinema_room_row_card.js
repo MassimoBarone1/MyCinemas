@@ -2,6 +2,12 @@ import React from 'react';
 import {View, Text, StyleSheet, ImageBackground, TouchableOpacity, Dimensions} from 'react-native';
 import Colors from '../utils/colors';
 
+const formatDate = (date) => {
+    const splittedDate = date.split(" ");
+    return "previsto il " + splittedDate[0] + " alle ore " + splittedDate[1];
+
+}
+
 const CinemaRoomRowCard = props => {
     return (
         <TouchableOpacity onPress={props.onClick} style={{...styles.container, borderColor: props.selected ? Colors.orange : 'transparent'}}>
@@ -11,7 +17,7 @@ const CinemaRoomRowCard = props => {
             <View style={styles.roomsContainer}><Text style={styles.roomSeats}>{props.roomSeats} Posti a sedere</Text></View>
             <View style={styles.showsContainer}>
                 <Text style={styles.roomShows}>Spettacoli</Text>
-                {props.shows.map(show => <Text key={show.id} style={styles.roomShowTxt}>{show.name}</Text>)}
+                {props.shows.map(show => <Text key={show.id} style={styles.roomShowTxt}><Text style={{color: Colors.orange}}>{show.name}</Text> {formatDate(show.date)}</Text>)}
                 
             </View>
             </View>

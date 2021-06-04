@@ -9,7 +9,7 @@ const CinemaCard = props => {
                 <View>
                     <Text style={styles.nameTxt}>{props.name}</Text>
                     <Text style={styles.addressTxt}>{props.address}</Text>
-                    <Text style={styles.openingsTxt}>{props.openings}</Text>
+                    <Text style={styles.openingsTxt}>Orari di apertura: {props.openings}</Text>
                 </View>
                 <View style={styles.roomsInfo}>
                     <Text style={styles.roomsTxt}>{props.roomsNumber}</Text>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOpacity: 0.4,
         shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 8,
+        shadowRadius: 10,
         backgroundColor: 'white',
         margin: 15
     },

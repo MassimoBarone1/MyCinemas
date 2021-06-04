@@ -3,12 +3,9 @@ import {View, Text, StyleSheet, Dimensions, ScrollView} from 'react-native';
 import Colors from '../utils/colors';
 
 const formatDate = (date) => {
-    const day = date.getDay();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    return day + "-" + month + "-" + year + " " + " alle " + hours + ":" + minutes;
+    const splittedDate = date.split(" ");
+    return "previsto il " + splittedDate[0] + " alle ore " + splittedDate[1];
+
 }
 
 const CinemaRoomRow = props => {
@@ -18,7 +15,7 @@ const CinemaRoomRow = props => {
         <Text style={styles.labelContainer}>Sala: <Text style={styles.value}>{props.name}</Text></Text>
         <Text style={{...styles.labelContainer, paddingTop: 8}}>Posti a sedere: <Text style={styles.value}>{props.numOfSeats}</Text></Text>
         <Text style={{...styles.labelContainer, paddingTop: 8}}>Spettacoli:</Text>
-        {props.shows.map(show => <Text key={show.id} style={{...styles.value, paddingTop: 4, }}>{show.name} il {show.date}</Text>)}
+        {props.shows.map(show => <Text key={show.id} style={{...styles.value, paddingTop: 4, }}>{show.name} {formatDate(show.date)}</Text>)}
         </ScrollView>
     </View>)
 };
