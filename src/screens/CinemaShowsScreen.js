@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import ShowCard from '../components/show_card';
 
 const CinemaShowsScreen = props => {
 
@@ -17,10 +18,14 @@ const CinemaShowsScreen = props => {
     return (
         <View style={styles.container}>
             {selectedRoom.name ? <FlatList
-            contentContainerStyle={{ flexGrow: 1}}
+            contentContainerStyle={{ flexGrow: 1,}}
             keyExtractor={item => item.id}
             data={selectedRoom.shows}
-            renderItem={itemData => <Text>{itemData.item.name}</Text>} />: <View style={{alignItems: 'center'}}><Text style={styles.fallbackTxt}>You have not chosen a room yet!</Text></View>}
+            renderItem={itemData => 
+            <ShowCard
+            showName={itemData.item.name}
+            showDate={itemData.item.date}
+            showPlaces={itemData.item.remainingPlaces} />} />: <View style={{alignItems: 'center'}}><Text style={styles.fallbackTxt}>You have not chosen a room yet!</Text></View>}
             
         </View>
     )
@@ -31,7 +36,6 @@ export default CinemaShowsScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         backgroundColor: 'white'
     },
     fallbackTxt: {

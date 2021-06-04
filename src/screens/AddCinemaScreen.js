@@ -13,8 +13,14 @@ const formatDate = (date) => {
     const day = date.getDay();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
+    let hours = date.getHours();
+    if(hours <= 9){
+        hours = "0"+hours;
+    }
+    let minutes = date.getMinutes();
+    if(minutes <= 9){
+        minutes = "0"+minutes;
+    }
     return day + "-" + month + "-" + year + " " + hours + ":" + minutes;
 }
 
@@ -185,17 +191,20 @@ const AddCinemaScreen = props => {
                                                         {
                                                             id: uuid.v4(),
                                                             name: firstShow,
-                                                            date: formatDate(firstShowDate)
+                                                            date: formatDate(firstShowDate),
+                                                            remainingPlaces: roomSeats
                                                         },
                                                         {
                                                             id: uuid.v4(),
                                                             name: secondShow,
-                                                            date: formatDate(secondShowDate)
+                                                            date: formatDate(secondShowDate),
+                                                            remainingPlaces: roomSeats
                                                         },
                                                         {
                                                             id: uuid.v4(),
                                                             name: thirdShow,
-                                                            date: formatDate(thirdShowDate)
+                                                            date: formatDate(thirdShowDate),
+                                                            remainingPlaces: roomSeats
                                                         }]
                                                 }]);
                                                 setRoomName("");
