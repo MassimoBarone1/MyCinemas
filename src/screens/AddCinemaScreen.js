@@ -9,20 +9,31 @@ import FormInput from '../components/form_input';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import uuid from 'react-native-uuid';
 import RoundedButton from '../components/rounded_button';
+import CircularButton from '../components/circular_button';
 
 const formatDate = (date) => {
-    const day = date.getDay();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    let hours = date.getHours();
-    if (hours <= 9) {
-        hours = "0" + hours;
+    console.log("BBB " + date);
+    if(date){
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        let hours = date.getHours();
+        if (hours <= 9) {
+            hours = "0" + hours;
+        }
+        let minutes = date.getMinutes();
+        if (minutes <= 9) {
+            minutes = "0" + minutes;
+        }
+        
+        const result = day + "-" + month + "-" + year + " " + hours + ":" + minutes;
+        console.log("Result is "  + result);
+        return result;
     }
-    let minutes = date.getMinutes();
-    if (minutes <= 9) {
-        minutes = "0" + minutes;
+    else{
+        return "";
     }
-    return day + "-" + month + "-" + year + " " + hours + ":" + minutes;
+    
 }
 
 const AddCinemaScreen = props => {
@@ -43,6 +54,8 @@ const AddCinemaScreen = props => {
     const [cinemaRooms, setCinemaRooms] = useState([]);
     const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
     const [clickedValue, setClickedValue] = useState(-1);
+
+    console.log("Date " + firstShowDate + " " + secondShowDate + " " + thirdShowDate);
 
     const dispatch = useDispatch();
 
@@ -105,9 +118,11 @@ const AddCinemaScreen = props => {
                         <View style={styles.modalView}>
                             <View style={styles.modalHeader}>
                                 <Text style={styles.modalText}>Inserisci le info!</Text>
-                                <TouchableOpacity title="Chiudi" onPress={() => setModalVisible(false)} style={styles.closeBtn}>
-                                    <Ionicons name="close" color={Colors.white} size={24} />
-                                </TouchableOpacity>
+                                <CircularButton
+                                    onClick={() => setModalVisible(false)}
+                                    icon="close"
+                                    btnStyles={{ width: 50, height: 50, borderRadius: 50 }} />
+
                             </View>
                             <View style={{ flex: 1, width: '100%', paddingTop: 8 }}>
                                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -130,7 +145,7 @@ const AddCinemaScreen = props => {
 
                                     <View style={styles.formBtnContainer}>
                                         <FormInput
-                                            label={"Film 1, Inizio: " + formatDate(firstShowDate)}
+                                            label={"Film 1" + (firstShowDate ? " , Inizio: " + formatDate(firstShowDate) : "")}
                                             style={{ width: '80%' }}
                                             initialValue={firstShow}
                                             onChange={(text) => setFirstShow(text)}
@@ -138,16 +153,17 @@ const AddCinemaScreen = props => {
                                             keyboardType="default"
                                             onSubmitEditing={() => secondShowRef.current.focus()}
                                             blurOnSubmit={false} />
-                                        <TouchableOpacity onPress={() => {
-                                            setClickedValue(0);
-                                            setIsDatePickerVisible(true);
-                                        }} style={styles.calendarBtn}>
-                                            <Ionicons name="calendar" color={Colors.white} size={24} />
-                                        </TouchableOpacity>
+                                        <CircularButton
+                                            onClick={() => {
+                                                setClickedValue(0);
+                                                setIsDatePickerVisible(true)
+                                            }}
+                                            icon="calendar"
+                                            btnStyles={{ width: 40, height: 40, borderRadius: 40, marginBottom: 8 }} />
                                     </View>
                                     <View style={styles.formBtnContainer}>
                                         <FormInput
-                                            label={"Film 2, Inizio: " + formatDate(secondShowDate)}
+                                            label={"Film 2" +  (secondShowDate ? " , Inizio: " + formatDate(secondShowDate) : "")}
                                             style={{ width: '80%' }}
                                             initialValue={secondShow}
                                             onChange={(text) => setSecondShow(text)}
@@ -156,16 +172,18 @@ const AddCinemaScreen = props => {
                                             ref={secondShowRef}
                                             onSubmitEditing={() => thirdShowRef.current.focus()}
                                             blurOnSubmit={false} />
-                                        <TouchableOpacity onPress={() => {
-                                            setClickedValue(1);
-                                            setIsDatePickerVisible(true)
-                                        }} style={styles.calendarBtn}>
-                                            <Ionicons name="calendar" color={Colors.white} size={24} />
-                                        </TouchableOpacity>
+                                        <CircularButton
+                                            onClick={() => {
+                                                setClickedValue(1);
+                                                setIsDatePickerVisible(true)
+                                            }}
+                                            icon="calendar"
+                                            btnStyles={{ width: 40, height: 40, borderRadius: 40, marginBottom: 8 }} />
+
                                     </View>
                                     <View style={styles.formBtnContainer}>
                                         <FormInput
-                                            label={"Film 3, Inizio: " + formatDate(thirdShowDate)}
+                                            label={"Film 3" +  (thirdShowDate ? " , Inizio: " + formatDate(thirdShowDate) : "")}
                                             style={{ width: '80%' }}
                                             initialValue={thirdShow}
                                             onChange={(text) => setThirdShow(text)}
@@ -173,59 +191,61 @@ const AddCinemaScreen = props => {
                                             keyboardType="default"
                                             ref={thirdShowRef}
                                         />
-                                        <TouchableOpacity onPress={() => {
-                                            setClickedValue(2);
-                                            setIsDatePickerVisible(true)
-                                        }} style={styles.calendarBtn}>
-                                            <Ionicons name="calendar" color={Colors.white} size={24} />
-                                        </TouchableOpacity>
-                                    </View>
-                                    
-                                        <RoundedButton
-                                            onClick={
-                                                () => {
+                                        <CircularButton
+                                            onClick={() => {
+                                                setClickedValue(2);
+                                                setIsDatePickerVisible(true)
+                                            }}
+                                            icon="calendar"
+                                            btnStyles={{ width: 40, height: 40, borderRadius: 40, marginBottom: 8 }} />
 
-                                                    if (roomName !== "" && roomSeats !== "" && firstShow !== "" && secondShow !== "" && thirdShow !== "") {
-                                                        setCinemaRooms([...cinemaRooms, {
-                                                            id: uuid.v4(),
-                                                            name: roomName,
-                                                            seats: roomSeats,
-                                                            shows: [
-                                                                {
-                                                                    id: uuid.v4(),
-                                                                    name: firstShow,
-                                                                    date: formatDate(firstShowDate),
-                                                                    remainingPlaces: roomSeats
-                                                                },
-                                                                {
-                                                                    id: uuid.v4(),
-                                                                    name: secondShow,
-                                                                    date: formatDate(secondShowDate),
-                                                                    remainingPlaces: roomSeats
-                                                                },
-                                                                {
-                                                                    id: uuid.v4(),
-                                                                    name: thirdShow,
-                                                                    date: formatDate(thirdShowDate),
-                                                                    remainingPlaces: roomSeats
-                                                                }]
-                                                        }]);
-                                                        setRoomName("");
-                                                        setRoomSeats("");
-                                                        setFirstShow("");
-                                                        setSecondShow("");
-                                                        setThirdShow("");
-                                                        setModalVisible(false);
-                                                    }
-                                                    else {
-                                                        Alert.alert("Operazione negata", "Controlla tutti i campi", [{ text: 'Ok' }])
-                                                    }
-        
+                                    </View>
+
+                                    <RoundedButton
+                                        onClick={
+                                            () => {
+
+                                                if (roomName !== "" && roomSeats !== "" && firstShow !== "" && secondShow !== "" && thirdShow !== "") {
+                                                    setCinemaRooms([...cinemaRooms, {
+                                                        id: uuid.v4(),
+                                                        name: roomName,
+                                                        seats: roomSeats,
+                                                        shows: [
+                                                            {
+                                                                id: uuid.v4(),
+                                                                name: firstShow,
+                                                                date: formatDate(firstShowDate),
+                                                                remainingPlaces: roomSeats
+                                                            },
+                                                            {
+                                                                id: uuid.v4(),
+                                                                name: secondShow,
+                                                                date: formatDate(secondShowDate),
+                                                                remainingPlaces: roomSeats
+                                                            },
+                                                            {
+                                                                id: uuid.v4(),
+                                                                name: thirdShow,
+                                                                date: formatDate(thirdShowDate),
+                                                                remainingPlaces: roomSeats
+                                                            }]
+                                                    }]);
+                                                    setRoomName("");
+                                                    setRoomSeats("");
+                                                    setFirstShow("");
+                                                    setSecondShow("");
+                                                    setThirdShow("");
+                                                    setModalVisible(false);
                                                 }
+                                                else {
+                                                    Alert.alert("Operazione negata", "Controlla tutti i campi", [{ text: 'Ok' }])
+                                                }
+
                                             }
-                                            mainStyles={{ marginBottom: 8 }}
-                                            styles={{ marginTop: 16 }} 
-                                            label="Conferma"/>
+                                        }
+                                        mainStyles={{ marginBottom: 8 }}
+                                        styles={{ marginTop: 16 }}
+                                        label="Conferma" />
 
                                 </ScrollView>
                             </View>
@@ -235,7 +255,7 @@ const AddCinemaScreen = props => {
                         isVisible={isDatePickerVisible}
                         mode="datetime"
                         onConfirm={(date) => {
-                            console.log("AAA confirm");
+                            
                             if (clickedValue === 0) {
                                 setFirstShowDate(date);
                             }
@@ -296,7 +316,7 @@ const AddCinemaScreen = props => {
                 onClick={() => { setModalVisible(true); }}
                 mainStyles={{ marginBottom: 8 }}
                 styles={{ marginTop: 16 }}
-                label="Aggiungi Sala"/>
+                label="Aggiungi Sala" />
 
         </ScrollView>);
 };
