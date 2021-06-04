@@ -8,18 +8,19 @@ import CinemaRoomRow from '../components/cinema_room_row';
 import FormInput from '../components/form_input';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import uuid from 'react-native-uuid';
+import RoundedButton from '../components/rounded_button';
 
 const formatDate = (date) => {
     const day = date.getDay();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     let hours = date.getHours();
-    if(hours <= 9){
-        hours = "0"+hours;
+    if (hours <= 9) {
+        hours = "0" + hours;
     }
     let minutes = date.getMinutes();
-    if(minutes <= 9){
-        minutes = "0"+minutes;
+    if (minutes <= 9) {
+        minutes = "0" + minutes;
     }
     return day + "-" + month + "-" + year + " " + hours + ":" + minutes;
 }
@@ -179,51 +180,52 @@ const AddCinemaScreen = props => {
                                             <Ionicons name="calendar" color={Colors.white} size={24} />
                                         </TouchableOpacity>
                                     </View>
-                                    <View style={styles.touchable}>
-                                        <TouchableComponent onPress={() => {
+                                    
+                                        <RoundedButton
+                                            onClick={
+                                                () => {
 
-                                            if (roomName !== "" && roomSeats !== "" && firstShow !== "" && secondShow !== "" && thirdShow !== "") {
-                                                setCinemaRooms([...cinemaRooms, {
-                                                    id: uuid.v4(),
-                                                    name: roomName,
-                                                    seats: roomSeats,
-                                                    shows: [
-                                                        {
+                                                    if (roomName !== "" && roomSeats !== "" && firstShow !== "" && secondShow !== "" && thirdShow !== "") {
+                                                        setCinemaRooms([...cinemaRooms, {
                                                             id: uuid.v4(),
-                                                            name: firstShow,
-                                                            date: formatDate(firstShowDate),
-                                                            remainingPlaces: roomSeats
-                                                        },
-                                                        {
-                                                            id: uuid.v4(),
-                                                            name: secondShow,
-                                                            date: formatDate(secondShowDate),
-                                                            remainingPlaces: roomSeats
-                                                        },
-                                                        {
-                                                            id: uuid.v4(),
-                                                            name: thirdShow,
-                                                            date: formatDate(thirdShowDate),
-                                                            remainingPlaces: roomSeats
-                                                        }]
-                                                }]);
-                                                setRoomName("");
-                                                setRoomSeats("");
-                                                setFirstShow("");
-                                                setSecondShow("");
-                                                setThirdShow("");
-                                                setModalVisible(false);
+                                                            name: roomName,
+                                                            seats: roomSeats,
+                                                            shows: [
+                                                                {
+                                                                    id: uuid.v4(),
+                                                                    name: firstShow,
+                                                                    date: formatDate(firstShowDate),
+                                                                    remainingPlaces: roomSeats
+                                                                },
+                                                                {
+                                                                    id: uuid.v4(),
+                                                                    name: secondShow,
+                                                                    date: formatDate(secondShowDate),
+                                                                    remainingPlaces: roomSeats
+                                                                },
+                                                                {
+                                                                    id: uuid.v4(),
+                                                                    name: thirdShow,
+                                                                    date: formatDate(thirdShowDate),
+                                                                    remainingPlaces: roomSeats
+                                                                }]
+                                                        }]);
+                                                        setRoomName("");
+                                                        setRoomSeats("");
+                                                        setFirstShow("");
+                                                        setSecondShow("");
+                                                        setThirdShow("");
+                                                        setModalVisible(false);
+                                                    }
+                                                    else {
+                                                        Alert.alert("Operazione negata", "Controlla tutti i campi", [{ text: 'Ok' }])
+                                                    }
+        
+                                                }
                                             }
-                                            else {
-                                                Alert.alert("Operazione negata", "Controlla tutti i campi", [{ text: 'Ok' }])
-                                            }
-
-                                        }}>
-                                            <View style={styles.addBtnContainer}>
-                                                <Text style={styles.btnText}>Conferma</Text>
-                                            </View>
-                                        </TouchableComponent>
-                                    </View>
+                                            mainStyles={{ marginBottom: 8 }}
+                                            styles={{ marginTop: 16 }} 
+                                            label="Conferma"/>
 
                                 </ScrollView>
                             </View>
@@ -290,16 +292,11 @@ const AddCinemaScreen = props => {
                     </View>))}
 
             </View>
-            <View style={styles.touchable}>
-                <TouchableComponent onPress={() => {
-                    setModalVisible(true);
-                }} style={{ flex: 1 }}>
-                    <View style={styles.addBtnContainer}>
-                        <Text style={styles.btnText}>Aggiungi Sala</Text>
-                    </View>
-                </TouchableComponent>
-            </View>
-
+            <RoundedButton
+                onClick={() => { setModalVisible(true); }}
+                mainStyles={{ marginBottom: 8 }}
+                styles={{ marginTop: 16 }}
+                label="Aggiungi Sala"/>
 
         </ScrollView>);
 };
@@ -325,12 +322,6 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         width: '80%',
         height: 50
-    },
-    touchable: {
-        alignItems: 'center',
-        paddingBottom: 8,
-        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-        borderRadius: 30,
     },
     addBtnContainer: {
         width: Dimensions.get('window').width * 0.6,

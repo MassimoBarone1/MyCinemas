@@ -16,11 +16,12 @@ const CinemaShowsScreen = props => {
         });
     });
 
-    const updateSelectedShow = useCallback(() => {
+
+    useEffect(() => {
         if(selectedId !== -1){
             dispatch(updateSelectedShow(selectedId));
         }
-    },[updateSelectedShow, selectedId]);
+    },[selectedId, updateSelectedShow]);
     
 
 
@@ -34,12 +35,14 @@ const CinemaShowsScreen = props => {
             <ShowCard
             selected={itemData.item.id === selectedId}
             onClick={() => {
+                
                 if(itemData.item.id === selectedId){
                     setSelectedId(-1);
                 }
                 else{
                     setSelectedId(itemData.item.id);
                 }
+                console.log(itemData.item.id + " " + selectedId);
             }}
             showName={itemData.item.name}
             showDate={itemData.item.date}
