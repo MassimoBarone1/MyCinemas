@@ -214,7 +214,7 @@ const AddCinemaScreen = props => {
                                         onClick={
                                             () => {
 
-                                                if (roomName !== "" && roomSeats !== "" && firstShow !== "" && secondShow !== "" && thirdShow !== "") {
+                                                if (roomName !== "" && roomSeats !== "" && firstShow !== "" && secondShow !== "" && thirdShow !== "" && showsPrice !== "") {
                                                     setCinemaRooms([...cinemaRooms, {
                                                         id: uuid.v4(),
                                                         name: roomName,

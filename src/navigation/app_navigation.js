@@ -10,6 +10,7 @@ import PersonalTicketsScreen from '../screens/PersonalTicketsScreen';
 import { Platform } from 'react-native';
 import Colors from '../utils/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import TabIcon from '../components/tab_icon';
 
 const commonStackOptions = {
     headerStyle: {
@@ -119,7 +120,11 @@ export const AppBottomNavigator = () => {
                 options={{
                     tabBarLabel: 'Scopri',
                     tabBarIcon: ({ color, size }) => {
-                        return <Ionicons name='search' color={color} size={size} />;
+                        return <TabIcon
+                        name='search'
+                        type="SEARCH"
+                        color={color}
+                        size={size} />
                     },
                 }} />
             <AppBottomTabNavigator.Screen
@@ -128,7 +133,11 @@ export const AppBottomNavigator = () => {
                 options={{
                     tabBarLabel: 'Sale',
                     tabBarIcon: ({ color, size }) => {
-                        return <Ionicons name='albums' color={color} size={size} />;
+                        return <TabIcon
+                        name='albums'
+                        type="ALBUMS"
+                        color={color}
+                        size={size} />
                     }
                 }} />
             <AppBottomTabNavigator.Screen
@@ -137,7 +146,11 @@ export const AppBottomNavigator = () => {
                 options={{
                     tabBarLabel: 'Spettacoli',
                     tabBarIcon: ({ color, size }) => {
-                        return <Ionicons name='film' color={color} size={size} />;
+                        return <TabIcon
+                        name='film'
+                        type="FILM"
+                        color={color}
+                        size={size} />
                     }
                 }} />
             <AppBottomTabNavigator.Screen
@@ -146,7 +159,11 @@ export const AppBottomNavigator = () => {
                 options={{
                     tabBarLabel: 'Prenota',
                     tabBarIcon: ({ color, size }) => {
-                        return <Ionicons name='book' color={color} size={size} />;
+                        return <TabIcon
+                        type="BOOK"
+                        name='book'
+                        color={color}
+                        size={size} />
                     }
                 }} />
         </AppBottomTabNavigator.Navigator>
