@@ -13,9 +13,9 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7A9752CCDE201E78A5A48CB3 /* libPods-MyCinemas-MyCinemasTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E16E0F2F2D405DE8659DC10 /* libPods-MyCinemas-MyCinemasTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		8225E4762668ED2E0073830E /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8225E4732668EC7B0073830E /* Montserrat-Bold.ttf */; };
 		8225E4772668ED310073830E /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8225E4752668EC7B0073830E /* Montserrat-Medium.ttf */; };
 		8225E4782668ED340073830E /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8225E4742668EC7B0073830E /* Montserrat-Light.ttf */; };
+		8275A9CD266E0130001AA024 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8275A9CC266E0127001AA024 /* Montserrat-Bold.ttf */; };
 		B2F7CD1C10D7AD0A48431AF0 /* libPods-MyCinemas.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10E3A42F7A389D48DF9C676C /* libPods-MyCinemas.a */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +44,6 @@
 		1A35C8C810234930BA7CA47E /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		5E16E0F2F2D405DE8659DC10 /* libPods-MyCinemas-MyCinemasTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyCinemas-MyCinemasTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MyCinemas/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8225E4732668EC7B0073830E /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "../../../Downloads/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		8225E4742668EC7B0073830E /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Light.ttf"; path = "../../../Downloads/Montserrat/Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		8225E4752668EC7B0073830E /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Medium.ttf"; path = "../../../Downloads/Montserrat/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		825E4A88266688A400AFDDBF /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
@@ -63,6 +62,7 @@
 		825E4A95266688A400AFDDBF /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		825E4A96266688A400AFDDBF /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		825E4A97266688A400AFDDBF /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		8275A9CC266E0127001AA024 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "../../../Downloads/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		B9F7F7DE364DAA6006D4359D /* Pods-MyCinemas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCinemas.debug.xcconfig"; path = "Target Support Files/Pods-MyCinemas/Pods-MyCinemas.debug.xcconfig"; sourceTree = "<group>"; };
 		C7C423E72EEC4F88B54C774E /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		DBD4B383810DFD6CECEBB5B7 /* Pods-MyCinemas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCinemas.release.xcconfig"; path = "Target Support Files/Pods-MyCinemas/Pods-MyCinemas.release.xcconfig"; sourceTree = "<group>"; };
@@ -112,7 +112,6 @@
 		13B07FAE1A68108700A75B9A /* MyCinemas */ = {
 			isa = PBXGroup;
 			children = (
-				825E4A872666887800AFDDBF /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -136,7 +135,7 @@
 		825E4A872666887800AFDDBF /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				8225E4732668EC7B0073830E /* Montserrat-Bold.ttf */,
+				8275A9CC266E0127001AA024 /* Montserrat-Bold.ttf */,
 				8225E4742668EC7B0073830E /* Montserrat-Light.ttf */,
 				8225E4752668EC7B0073830E /* Montserrat-Medium.ttf */,
 				825E4A97266688A400AFDDBF /* AntDesign.ttf */,
@@ -169,6 +168,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				825E4A872666887800AFDDBF /* Fonts */,
 				13B07FAE1A68108700A75B9A /* MyCinemas */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MyCinemasTests */,
@@ -307,9 +307,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8275A9CD266E0130001AA024 /* Montserrat-Bold.ttf in Resources */,
 				8225E4782668ED340073830E /* Montserrat-Light.ttf in Resources */,
 				8225E4772668ED310073830E /* Montserrat-Medium.ttf in Resources */,
-				8225E4762668ED2E0073830E /* Montserrat-Bold.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);

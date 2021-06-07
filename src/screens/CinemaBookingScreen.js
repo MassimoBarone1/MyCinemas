@@ -12,7 +12,8 @@ const CinemaBookingScreen = props => {
 
     const selectedShow = useSelector(state => state.cinema.selectedShow);
     const selectedRoom = useRef(useSelector(state => state.cinema.selectedRoom));
-    const [ticketQty, setTicketQty] = useState(0);
+    const [ticketQty, setTicketQty] = useState(1);
+    const [ticketTotPrice, setTicketTotPrice] = useState(selectedShow.price);
     const dispatch = useDispatch();
 
     return (
@@ -33,29 +34,46 @@ const CinemaBookingScreen = props => {
                                     numOfSeats={selectedShow.remainingPlaces}
                                     showDate={selectedShow.date} />
                             </View>
-                            <View style={{paddingTop: 24}}><Text style={styles.ticketLabel}>Scegli il numero di biglietti</Text></View>
+                            <View style={{ paddingTop: 24 }}>
+                                <Text style={styles.ticketLabel}>Scegli il numero di biglietti</Text>
+                            </View>
                             <View style={styles.quantityContainer}>
                                 <CircularButton
                                     onClick={() => {
-                                        setTicketQty(ticketQty - 1);
-                                     }}
+                                        if (ticketQty === 1) {
+                                            Alert.alert("Operazione Negata!", "Non puoi rimuovere ancora!", [{ text: 'Ok' }]);
+                                        }
+                                        else {
+                                            const qty = ticketQty - 1;
+                                            setTicketQty(qty);
+                                            setTicketTotPrice(qty * selectedShow.price);
+                                        }
+
+                                    }}
                                     icon="cart-outline"
                                     btnStyles={{ width: 60, height: 60, borderRadius: 60, marginRight: 12 }} />
-                                    <View style={styles.qtyValueContainer}>
-                                        <Text style={styles.title}>{ticketQty}</Text>
-                                    </View>
+                                <View style={styles.qtyValueContainer}>
+                                    <Text style={styles.title}>{ticketQty}</Text>
+                                </View>
                                 <CircularButton
-                                    onClick={() => { 
-                                        if(ticketQty < selectedShow.remainingPlaces){
-                                            setTicketQty(ticketQty + 1);
+                                    onClick={() => {
+                                        if (ticketQty < selectedShow.remainingPlaces) {
+                                            const qty = ticketQty + 1;
+                                            setTicketQty(qty);
+                                            
+                                            setTicketTotPrice(qty * selectedShow.price);
+                                            
                                         }
-                                        else{
+                                        else {
                                             Alert.alert("Operazione Negata!", "Raggiunto numero massimo di biglietti!", [{ text: 'Ok' }])
                                         }
-                                        
+
                                     }}
                                     icon="cart"
                                     btnStyles={{ width: 60, height: 60, borderRadius: 60, marginLeft: 12 }} />
+                            </View>
+                            <View style={{ paddingTop: 24 }}>
+                                <Text style={styles.ticketLabel}>Totale: {ticketTotPrice} €</Text>
                             </View>
                         </View>
                         <RoundedButton
@@ -63,14 +81,20 @@ const CinemaBookingScreen = props => {
                                 dispatch(buyTicket({
                                     id: uuid.v4(),
                                     showId: selectedShow.id,
-                                    ticketQty: ticketQty
+                                    showName: selectedShow.name,
+                                    showDate: selectedShow.date,
+                                    ticketQty: ticketQty,
+                                    ticketPrice: ticketTotPrice
                                 }));
-                                Alert.alert("Operazione Completata!", "Biglietto Acquistato", [{ text: 'Ok', onPress: () => {
-                                    setTicketQty(0);
-                                    
-                                }}])
-                                
-                             }}
+                                Alert.alert("Operazione Completata!", "Biglietto Acquistato", [{
+                                    text: 'Ok', onPress: () => {
+                                        setTicketQty(1);
+                                        setTicketTotPrice(selectedShow.price);
+
+                                    }
+                                }])
+
+                            }}
                             label="Acquista"
                             mainStyles={{ marginBottom: 8 }} />
                     </View>

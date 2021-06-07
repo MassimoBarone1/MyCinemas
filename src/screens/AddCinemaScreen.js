@@ -50,6 +50,7 @@ const AddCinemaScreen = props => {
     const [secondShowDate, setSecondShowDate] = useState(new Date());
     const [thirdShow, setThirdShow] = useState("");
     const [thirdShowDate, setThirdShowDate] = useState(new Date());
+    const [showsPrice, setShowsPrice] = useState("");
     const [cinemaRooms, setCinemaRooms] = useState([]);
     const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
     const [clickedValue, setClickedValue] = useState(-1);
@@ -63,6 +64,7 @@ const AddCinemaScreen = props => {
     const numberOfSeatsRef = useRef();
     const secondShowRef = useRef();
     const thirdShowRef = useRef();
+    const showsPriceRef = useRef();
 
     // Submit function
     const saveCinemaHandler = useCallback(() => {
@@ -186,7 +188,7 @@ const AddCinemaScreen = props => {
                                             style={{ width: '80%' }}
                                             initialValue={thirdShow}
                                             onChange={(text) => setThirdShow(text)}
-                                            returnKeyType="done"
+                                            returnKeyType="next"
                                             keyboardType="default"
                                             ref={thirdShowRef}
                                         />
@@ -199,6 +201,14 @@ const AddCinemaScreen = props => {
                                             btnStyles={{ width: 40, height: 40, borderRadius: 40, marginBottom: 8 }} />
 
                                     </View>
+                                    <FormInput
+                                            label="Prezzo singolo spettacolo"
+                                            initialValue={showsPrice}
+                                            onChange={(text) => setShowsPrice(text)}
+                                            onSubmitEditing={() => showsPriceRef.current.focus()}
+                                            keyboardType="numeric"
+                                            ref={showsPriceRef}
+                                        />
 
                                     <RoundedButton
                                         onClick={
@@ -214,19 +224,22 @@ const AddCinemaScreen = props => {
                                                                 id: uuid.v4(),
                                                                 name: firstShow,
                                                                 date: formatDate(firstShowDate),
-                                                                remainingPlaces: roomSeats
+                                                                remainingPlaces: roomSeats,
+                                                                price: showsPrice
                                                             },
                                                             {
                                                                 id: uuid.v4(),
                                                                 name: secondShow,
                                                                 date: formatDate(secondShowDate),
-                                                                remainingPlaces: roomSeats
+                                                                remainingPlaces: roomSeats,
+                                                                price: showsPrice
                                                             },
                                                             {
                                                                 id: uuid.v4(),
                                                                 name: thirdShow,
                                                                 date: formatDate(thirdShowDate),
-                                                                remainingPlaces: roomSeats
+                                                                remainingPlaces: roomSeats,
+                                                                price: showsPrice
                                                             }]
                                                     }]);
                                                     setRoomName("");

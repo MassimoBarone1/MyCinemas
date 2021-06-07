@@ -79,11 +79,16 @@ export const cinemaSlice = createSlice({
             state.selectedShow = updatedShow;
             
             // Update tickets
+            
             state.showTickets = [...state.showTickets, {
                 id: action.payload.id,
                 showId: action.payload.showId,
-                qty: action.payload.ticketQty
+                showName: action.payload.showName,
+                showDate: action.payload.showDate,
+                ticketQty: action.payload.ticketQty,
+                ticketTotPrice: action.payload.ticketPrice
             }];
+            
 
             // Update selected room
             const selectedShowInRoomIdx = state.selectedRoom.shows.findIndex(show => show.id === action.payload.showId);
