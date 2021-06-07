@@ -12,9 +12,9 @@ const TicketCard = props => {
                     <Text style={styles.qtyPrice}>{props.price}€</Text>
                 </View>
                 <View style={styles.ticketInfo}>
-                    <Text style={styles.showName}>{props.showName}</Text>
-                    <Text style={styles.showDate}>{props.showDate}</Text>
-                    <Text style={styles.showRoom}>{props.showRoom}</Text>
+                    <Text style={styles.showName}>Spettacolo: {props.showName}</Text>
+                    <Text style={styles.showDate}>Data: {props.showDate}</Text>
+                    <Text style={styles.showRoom}>Sala: {props.showRoom}</Text>
                 </View>
             </View>
         </View>)
