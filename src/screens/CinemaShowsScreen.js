@@ -12,7 +12,7 @@ const CinemaShowsScreen = props => {
 
     useEffect(() => {
         props.navigation.setOptions({
-            title: selectedRoom.name ? selectedRoom.name : 'Choose a Show'
+            title: selectedRoom.name ? selectedRoom.name : 'Scegli spettacolo'
         });
     });
 
@@ -47,7 +47,7 @@ const CinemaShowsScreen = props => {
             }}
             showName={itemData.item.name}
             showDate={itemData.item.date}
-            showPlaces={itemData.item.remainingPlaces} />} />: <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}><Text style={styles.fallbackTxt}>You have not chosen a room yet!</Text></View>}
+            showPlaces={itemData.item.remainingPlaces} />} />: <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}><Text style={styles.fallbackTxt}>Non hai ancora scelto una sala!</Text></View>}
             
         </View>
     )

@@ -39,7 +39,7 @@ const CinemasScreen = props => {
                             setSelectedId(itemData.item.id);
                         }
                     }} />}
-                keyExtractor={item => item.id} /> : <View style={{alignItems: 'center'}}><Text style={styles.fallbackTxt}>No Cinemas Added!</Text></View>}
+                keyExtractor={item => item.id} /> : <View style={{alignItems: 'center'}}><Text style={styles.fallbackTxt}>Nessun cinema aggiunto!</Text></View>}
             
         </View>
     )

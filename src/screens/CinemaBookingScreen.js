@@ -41,7 +41,7 @@ const CinemaBookingScreen = props => {
                                 <CircularButton
                                     onClick={() => {
                                         if (ticketQty === 1) {
-                                            Alert.alert("Operazione Negata!", "Non puoi rimuovere ancora!", [{ text: 'Ok' }]);
+                                            Alert.alert("Operazione Negata!", "Non puoi rimuovere biglietti!", [{ text: 'Ok' }]);
                                         }
                                         else {
                                             const qty = ticketQty - 1;
@@ -101,7 +101,7 @@ const CinemaBookingScreen = props => {
 
                 </ScrollView>
                 : <View style={styles.fallbackContainer}>
-                    <Text style={styles.fallbackTxt}>No Tickets Found!</Text>
+                    <Text style={styles.fallbackTxt}>Nessun ticket trovato!</Text>
                 </View>}
         </View>
 

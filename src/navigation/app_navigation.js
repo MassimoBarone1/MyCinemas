@@ -18,7 +18,8 @@ const commonStackOptions = {
     headerTintColor: Platform.OS === 'android' ? Colors.white : Colors.orange,
     headerTitleStyle: {
         fontFamily: 'Montserrat-Bold'
-    }
+    },
+    headerBackTitle: "Indietro"
 };
 
 
@@ -32,7 +33,7 @@ export const CinemasNavigator = () => {
                 name="Cinemas"
                 component={CinemasScreen}
                 options={({navigation, route}) => ({
-                    title: 'Discover Cinemas',
+                    title: 'Scopri Cinema',
                     headerRight: () => (<Ionicons name="add" color={Platform.OS === 'android' ? Colors.white : Colors.orange} style={{padding: 8}} size={24} onPress={() => {
                         navigation.navigate("AddCinema");
                     }}/>)
@@ -41,7 +42,7 @@ export const CinemasNavigator = () => {
                 name="AddCinema"
                 component={AddCinemaScreen}
                 options={{
-                    title: 'Add Cinema'
+                    title: 'Aggiungi Cinema'
                 }}/>
         </CinemaStackNavigator.Navigator>
     );
@@ -57,7 +58,7 @@ export const CinemaRoomsNavigator = () => {
                 name="CinemaRooms"
                 component={CinemaRoomsScreen}
                 options={{
-                    title: 'Choose a Room'
+                    title: 'Scegli Sala'
                 }} />
         </CinemaRoomsStackNavigator.Navigator>
     );
@@ -73,7 +74,7 @@ export const CinemaShowsNavigator = () => {
                 name="CinemaShows"
                 component={CinemaShowsScreen}
                 options={{
-                    title: 'Choose a Show'
+                    title: 'Scegli Spettacolo'
                 }} />
         </CinemaShowsStackNavigator.Navigator>
     );
@@ -92,13 +93,13 @@ export const CinemaBookingNavigator = () => {
                     headerRight: () => (<Ionicons name="list" color={Platform.OS === 'android' ? Colors.white : Colors.orange} style={{padding: 8}} size={24} onPress={() => {
                         navigation.navigate("PersonalTickets");
                     }}/>),
-                    title: 'Buy a Ticket'
+                    title: 'Compra Biglietto'
                 })} />
                 <CinemaBookingStackNavigator.Screen
                 name="PersonalTickets"
                 component={PersonalTicketsScreen}
                 options={{
-                    title: 'Your Tickets'
+                    title: 'I tuoi Biglietti'
                 }}/>
         </CinemaBookingStackNavigator.Navigator>
     );
@@ -116,7 +117,7 @@ export const AppBottomNavigator = () => {
                 name="List"
                 component={CinemasNavigator}
                 options={{
-                    tabBarLabel: 'Discover',
+                    tabBarLabel: 'Scopri',
                     tabBarIcon: ({ color, size }) => {
                         return <Ionicons name='search' color={color} size={size} />;
                     },
@@ -125,6 +126,7 @@ export const AppBottomNavigator = () => {
                 name="Rooms"
                 component={CinemaRoomsNavigator}
                 options={{
+                    tabBarLabel: 'Sale',
                     tabBarIcon: ({ color, size }) => {
                         return <Ionicons name='albums' color={color} size={size} />;
                     }
@@ -133,6 +135,7 @@ export const AppBottomNavigator = () => {
                 name="Shows"
                 component={CinemaShowsNavigator}
                 options={{
+                    tabBarLabel: 'Spettacoli',
                     tabBarIcon: ({ color, size }) => {
                         return <Ionicons name='film' color={color} size={size} />;
                     }
@@ -141,6 +144,7 @@ export const AppBottomNavigator = () => {
                 name="Book"
                 component={CinemaBookingNavigator}
                 options={{
+                    tabBarLabel: 'Prenota',
                     tabBarIcon: ({ color, size }) => {
                         return <Ionicons name='book' color={color} size={size} />;
                     }

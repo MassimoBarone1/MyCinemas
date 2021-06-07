@@ -87,7 +87,7 @@ const AddCinemaScreen = props => {
         props.navigation.setOptions({
             headerRight: () => (<Ionicons name="save" color={Platform.OS === 'android' ? Colors.white : Colors.orange} size={24} style={{ padding: 8 }} onPress={() => {
                 if (name === "" || address === "" || openings === "" || cinemaRooms.length === 0) {
-                    Alert.alert("Cannot save data", "Please control data", [{ text: 'Ok' }]);
+                    Alert.alert("Impossibile completare operazione", "Per favore, controlla i dati inseriti", [{ text: 'Ok' }]);
                     return;
                 }
                 saveCinemaHandler();

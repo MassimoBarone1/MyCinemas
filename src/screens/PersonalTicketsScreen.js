@@ -21,7 +21,7 @@ const PersonalTicketsScreen = props => {
                     showRoom={roomName}
                     price={itemData.item.ticketTotPrice}
                     qty={itemData.item.ticketQty} />} />
-        </View> : <Text style={styles.fallbackTxt}>You have not bought tickets yet!</Text>}
+        </View> : <Text style={styles.fallbackTxt}>Non hai ancora acquistato biglietti!</Text>}
 
     </View>)
 };

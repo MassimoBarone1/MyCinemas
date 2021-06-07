@@ -15,7 +15,7 @@ const CinemaRoomsScreen = props => {
     // Set header title
     useEffect(() => {
         props.navigation.setOptions({
-            title: selectedCinema.name ? selectedCinema.name : 'Choose a Room'
+            title: selectedCinema.name ? selectedCinema.name : 'Scegli una sala'
         });
     },[selectedCinema]);
 
@@ -49,7 +49,7 @@ const CinemaRoomsScreen = props => {
                 }
             }}
             selected={(selectedRoom && selectedRoom.id === itemData.item.id) ? true : false}/>}
-           /> : <View style={{alignItems: 'center'}}><Text style={styles.fallbackTxt}>No cinema selected!</Text></View>}
+           /> : <View style={{alignItems: 'center'}}><Text style={styles.fallbackTxt}>Nessun cinema selezionato!</Text></View>}
             
         </View>
     )
