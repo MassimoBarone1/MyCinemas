@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         margin: 10,
-        height: Dimensions.get('window').height * 0.35,
+        maxHeight: Dimensions.get('window').height * 0.45,
+        minHeight: 250,
         elevation: 20,
         shadowColor: Colors.black,
         shadowOpacity: 0.4,
