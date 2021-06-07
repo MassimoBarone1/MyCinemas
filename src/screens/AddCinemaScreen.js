@@ -188,6 +188,7 @@ const AddCinemaScreen = props => {
                                             style={{ width: '80%' }}
                                             initialValue={thirdShow}
                                             onChange={(text) => setThirdShow(text)}
+                                            onSubmitEditing={() => showsPriceRef.current.focus()}
                                             returnKeyType="next"
                                             keyboardType="default"
                                             ref={thirdShowRef}
@@ -205,7 +206,6 @@ const AddCinemaScreen = props => {
                                             label="Prezzo singolo spettacolo"
                                             initialValue={showsPrice}
                                             onChange={(text) => setShowsPrice(text)}
-                                            onSubmitEditing={() => showsPriceRef.current.focus()}
                                             keyboardType="numeric"
                                             ref={showsPriceRef}
                                         />
