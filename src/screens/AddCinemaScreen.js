@@ -10,6 +10,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import uuid from 'react-native-uuid';
 import RoundedButton from '../components/rounded_button';
 import CircularButton from '../components/circular_button';
+import AppHeaderRight from '../components/app_header_right';
 
 const formatDate = (date) => {
     if(date){
@@ -85,14 +86,15 @@ const AddCinemaScreen = props => {
 
     useEffect(() => {
         props.navigation.setOptions({
-            headerRight: () => (<Ionicons name="save" color={Platform.OS === 'android' ? Colors.white : Colors.orange} size={24} style={{ padding: 8 }} onPress={() => {
+            headerRight: () => (
+            <AppHeaderRight
+            leftIconName="save"
+            leftClick={() => {
                 if (name === "" || address === "" || openings === "" || cinemaRooms.length === 0) {
                     Alert.alert("Impossibile completare operazione", "Per favore, controlla i dati inseriti", [{ text: 'Ok' }]);
                     return;
                 }
                 saveCinemaHandler();
-
-
             }} />)
         })
     }, [saveCinemaHandler, name, address, openings, cinemaRooms]);
