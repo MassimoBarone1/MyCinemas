@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import Cinema from '../../models/cinema';
-import CinemaRooms from '../../models/cinema_rooms';
 
 export const cinemaSlice = createSlice({
     name: 'cinemaSlice',
